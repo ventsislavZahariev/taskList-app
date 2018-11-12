@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+	<meta charset="utf-8">
+	<title>ЗАДАЧИ</title>
+
+	<style type="text/css">
+		body {
+			font-size: 9px;
+			padding: 0;
+			margin: 0;
+			min-height: 100vh;
+			background-image: url(images/martin-teichmann-uncharted4-colony-teichmann-07_edit.jpg);
+			background-size: cover;
+			-moz-background-size: cover;
+			background-position: center;
+			background-repeat: no-repeat;
+			background-color: #2c3b42;
+		}
+		.container {
+			width: 100%;
+			max-width: 1000px;
+			margin: 0 auto;
+		}
+		section {
+			width: 100%;
+			padding: 10px 50px;
+			box-sizing: border-box;
+		}
+		h1, h2 {
+			font-family: Tahoma, sans-serif;
+			font-size: 3em;
+			font-weight: 500;
+			color: #b4ff00;
+			text-transform: uppercase;
+			margin-top: 50px;
+		}
+		h2 {
+			margin-bottom: 40px;
+		}
+		ol {
+			padding: 0;
+			margin: 0;
+			list-style-position: inside;
+		}
+		ol > li, h1 + li {
+			width: 100%;
+			box-sizing: border-box;
+			background-color: rgba(30,40,45,.9);
+			border-radius: 25px 0 25px 0;
+			border: 1px dotted #445c6a;
+			position: relative;
+		}
+		h1 + li {
+			padding: 20px 25px;
+			margin: 35px 0 0;
+		}
+		ol > li {
+			font-family: Arial, sans-serif;
+			font-size: 1.4rem;
+			line-height: 2rem;
+			color: aliceblue;
+			padding: 20px 25px 80px;
+			margin-bottom: 80px;
+		}
+		nav {
+			width: 100%;
+			display: inline-block;
+			text-align: right;
+			box-sizing: border-box;
+			margin-top: 20px;
+			position: absolute;
+			bottom: 0;
+			right: 0;
+		}
+		label {
+			font-family: Arial, sans-serif;
+			font-size: 1.5em;
+			line-height: 2em;
+			font-style: italic;
+			color: lavender;
+			width: 100%;
+			margin-top: 20px;
+			display: inline-block;
+		}
+		input {
+			font-size: 1rem;
+			color: crimson;
+			width: calc(100% - 120px);
+			height: 40px;
+			border-radius: 25px 0 0 0;
+		}
+		textarea {
+			font-size: .8rem;
+			color: darkslategrey;
+			width: 100%;
+			height: 80px;
+			min-height: 40px;
+			border-radius: 0 0 25px 0;
+			outline: none;
+			resize: none;
+			overflow: hidden;
+		}
+		input, textarea {
+			font-family: Arial, sans-serif;
+			font-weight: 300;
+			background-color: #e1eaf0;
+			border: 1px solid deepskyblue;
+			padding: 5px 10px;
+			box-sizing: border-box;
+			transition: background-color .5s linear;
+		}
+		input:focus, textarea:focus {
+			background-color: lightgoldenrodyellow !important;
+			transition: background-color .5s linear;
+		}
+		button {
+			font-family: Arial, sans-serif;
+			font-size: .75rem;
+			font-weight: bold;
+			text-align: center;
+			color: #2c3b42;
+			background-color: #b4ff00;
+			width: 120px;
+			border: none;
+			padding: 14px 20px;
+			cursor: pointer;
+			text-transform: uppercase;
+		}
+		button:hover {
+			color: white;
+			background-color: blueviolet;
+			transition: background-color .3s ease-in-out, color .3s ease-in-out;
+			-moz-transition: background-color .3s ease-in-out, color .3s ease-in-out;
+		}
+		span {
+			transform: skew(16deg);
+			-moz-transform: skew(16deg);
+			display: inline-block;
+		}
+		.blockQuote {
+			font-size: .7em;
+			line-height: 1.25em;
+			font-weight: normal;
+			color: #b4ff00;
+			margin-top: 30px;
+		}
+		#addBtn {
+			height: 40px;
+			color: white;
+			font-size: .8rem;
+			text-transform: uppercase;
+			padding: 13px 30px;
+			margin: 20px 0 0;
+			background-color: deepskyblue;
+			transition: background-color .3s ease-in-out, color .3s ease-in-out;
+			-moz-transition: background-color .3s ease-in-out, color .3s ease-in-out;
+		}
+		#addBtn:hover {
+			color: #2c3b42;
+			background-color: cyan;
+			transition: background-color .3s ease-in-out, color .3s ease-in-out;
+			-moz-transition: background-color .3s ease-in-out, color .3s ease-in-out;
+		}
+		.doneBtn {
+			border-radius: 25px 0 0 0;
+			margin-right:-8px;
+			transition: background-color .3s ease-in-out, color .3s ease-in-out;
+			-moz-transition: background-color .3s ease-in-out, color .3s ease-in-out;
+		}
+		.editBtn {
+			background-color: springgreen;
+			border-left: 2px solid #2c3b42;
+			border-right: 2px solid #2c3b42;
+			transform: skew(-17deg);
+			-moz-transform: skew(-17deg);
+			box-sizing: border-box;
+			transition: background-color .3s ease-in-out, color .3s ease-in-out;
+			-moz-transition: background-color .3s ease-in-out, color .3s ease-in-out;
+		}
+		.delBtn {
+			background-color: darkturquoise;
+			border-radius: 0 0 25px 0;
+			margin-left: -8px;
+			transition: background-color .3s ease-in-out, color .3s ease-in-out;
+			-moz-transition: background-color .3s ease-in-out, color .3s ease-in-out;
+		}
+		.delBtn:hover {
+			background-color: crimson;
+			transition: background-color .3s ease-in-out, color .3s ease-in-out;
+			-moz-transition: background-color .3s ease-in-out, color .3s ease-in-out;
+		}
+		#task.error {
+			border-color: red;
+			background-color: pink;
+		}
+		span.error {
+			font-family: Arial, sans-serif;
+			font-size: .8rem;
+			font-style: italic;
+			color: yellow;
+			padding-top: 5px;
+			transform: none;
+			-moz-transform: none;
+		}
+		.done {
+			text-decoration: line-through;
+			font-style: italic;
+			color: slategrey;
+		}
+
+		@media screen and (max-width: 900px) {
+			.container {
+				width: 100%;
+				margin: 0;
+			}
+		}
+		@media screen and (max-width: 750px) {
+			.container {
+				width: 500px;
+				margin: 0 auto;
+			}
+			section {
+				padding: 10px 20px;
+			}
+			input {
+				width: calc(100% - 100px);
+			}
+			nav {
+				text-align: center;
+			}
+			button {
+				width: 157px;
+			}
+			#addBtn {
+				width: 100px;
+				height: 40px;
+				padding: 13px 0;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+	<section id="taskCreation">
+		<h1>Добави задача</h1>
+		<li>
+			<input type="text" id="task"><button id="addBtn">добави</button>
+			<label for="notes">Бележки към задача:<br>
+				<textarea id="notes" name="notes"></textarea>
+			</label>
+		</li>
+	</section>
+	<section id="taskList"></section>
+	</div>
+
+	<script type="text/javascript" src="js/script.js"></script>
+</body>
+</html>
