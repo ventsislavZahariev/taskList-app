@@ -1,1 +1,1 @@
-# taskList-app
+# Tasks manager app project
