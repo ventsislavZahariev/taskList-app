@@ -6,77 +6,59 @@ const taskListSection = document.getElementById('taskList');
 const init = (function () {
 	return {
 		createTask: function () {
-			// Proceed if the title field is not empty
-			if (taskTitle.value.length > 0 && taskTitle.value !== ' ') {
-				// Clear if there were any error messages
-				clearErrors();
-
-				// Creation phase of all HTML elements and buttons for the tasks
-				if (document.getElementsByTagName('ol').length === 0) {
-					taskListSection.appendChild(document.createElement('ol'));
-				}
-				let olElement = document.getElementsByTagName('ol')[0];
-				if (document.getElementsByTagName('h2').length === 0) {
-					taskListSection.insertBefore(document.createElement('h2'), olElement).appendChild(document.createTextNode('Текущи задачи'));
-				}
-
-				let createLI = olElement.appendChild(document.createElement('li'));
-				let createNav = createLI.appendChild(document.createElement('nav'));
-
-				createLI.appendChild(document.createTextNode(taskTitle.value));
-				createLI.appendChild(document.createElement('br'));
-				if (taskNotes.value.length > 0) {
-					createLI.appendChild(document.createElement('blockquote')).appendChild(document.createElement('p')).appendChild(document.createTextNode(taskNotes.value));
-					var blockQuote = document.getElementsByTagName('blockquote');
-					for (each of blockQuote) {
-						each.classList.add('blockQuote');
-					}
-				}
-				createNav.appendChild(document.createElement('button')).appendChild(document.createTextNode('приключи'));
-				createNav.appendChild(document.createElement('button')).appendChild(document.createElement('span')).appendChild(document.createTextNode('редактирай'));
-				createNav.appendChild(document.createElement('button')).appendChild(document.createTextNode('изтрий'));
-
-				// Clear input fields
-				taskTitle.value = '';
-				taskNotes.value = '';
-
-				// Adding styling to the created buttons
-				let doneBtn = document.querySelectorAll('nav button:first-child');
-				for (let elmnt of doneBtn) {
-					elmnt.classList.add('doneBtn');
-				}
-				let editBtn = document.querySelectorAll('nav button:nth-child(2)');
-				for (let elmnt of editBtn) {
-					elmnt.classList.add('editBtn');
-				}
-				let delBtn = document.querySelectorAll('nav button:nth-child(3)');
-				for (let elmnt of delBtn) {
-					elmnt.classList.add('delBtn');
-				}
-
-				// Send the created buttons to the event listeners
-				taskButtonsEvents(
-					{
-						doneBtn,
-						editBtn,
-						delBtn,
-						blockQuote,
-						olElement
-					}
-				);
+			// Creation phase of all HTML elements and buttons for the tasks
+			if (document.getElementsByTagName('ol').length === 0) {
+				taskListSection.appendChild(document.createElement('ol'));
+			}
+			let olElement = document.getElementsByTagName('ol')[0];
+			if (document.getElementsByTagName('h2').length === 0) {
+				taskListSection.insertBefore(document.createElement('h2'), olElement).appendChild(document.createTextNode('Текущи задачи'));
 			}
 
-			// Actions to perform if the task title field is empty
-			else {
-				clearErrors();
-				let createSpan = document.createElement('span');
-				let taskCreationLI = document.getElementsByTagName('li')[0];
+			let createLI = olElement.appendChild(document.createElement('li'));
+			let createNav = createLI.appendChild(document.createElement('nav'));
 
-				createSpan.appendChild(document.createTextNode('*Въведи заглавие на задачата'));
-				createSpan.classList.add('error');
-				taskTitle.classList.add('error');
-				taskCreationLI.insertBefore(createSpan, document.getElementsByTagName('label')[0]);
+			createLI.appendChild(document.createTextNode(taskTitle.value));
+			createLI.appendChild(document.createElement('br'));
+			if (taskNotes.value.length > 0) {
+				createLI.appendChild(document.createElement('blockquote')).appendChild(document.createElement('p')).appendChild(document.createTextNode(taskNotes.value));
+				var blockQuote = document.getElementsByTagName('blockquote');
+				for (each of blockQuote) {
+					each.classList.add('blockQuote');
+				}
 			}
+			createNav.appendChild(document.createElement('button')).appendChild(document.createTextNode('приключи'));
+			createNav.appendChild(document.createElement('button')).appendChild(document.createElement('span')).appendChild(document.createTextNode('редактирай'));
+			createNav.appendChild(document.createElement('button')).appendChild(document.createTextNode('изтрий'));
+
+			// Clear input fields
+			taskTitle.value = '';
+			taskNotes.value = '';
+
+			// Adding styling to the created buttons
+			let doneBtn = document.querySelectorAll('nav button:first-child');
+			for (let elmnt of doneBtn) {
+				elmnt.classList.add('doneBtn');
+			}
+			let editBtn = document.querySelectorAll('nav button:nth-child(2)');
+			for (let elmnt of editBtn) {
+				elmnt.classList.add('editBtn');
+			}
+			let delBtn = document.querySelectorAll('nav button:nth-child(3)');
+			for (let elmnt of delBtn) {
+				elmnt.classList.add('delBtn');
+			}
+
+			// Send the created buttons to the event listeners
+			taskButtonsEvents(
+				{
+					doneBtn,
+					editBtn,
+					delBtn,
+					blockQuote,
+					olElement
+				}
+			);
 		}
 	}
 })();
@@ -89,13 +71,35 @@ function clearErrors() {
 	}
 }
 
+function initialChecks() {
+	// Proceed with the app initialisation if the title field is not empty
+	if (taskTitle.value.length > 0 && taskTitle.value !== ' ') {
+		// Clear if there were any error messages
+		clearErrors();
+		// Task creation
+		init.createTask();
+	}
+
+	// Actions to perform if the mandatory 'Title' field is empty
+	else {
+		clearErrors();
+		let createSpan = document.createElement('span');
+		let taskCreationLI = document.getElementsByTagName('li')[0];
+
+		createSpan.appendChild(document.createTextNode('*Въведи заглавие на задачата'));
+		createSpan.classList.add('error');
+		taskTitle.classList.add('error');
+		taskCreationLI.insertBefore(createSpan, document.getElementsByTagName('label')[0]);
+	}
+}
+
 
 // -------------------------------------------------
 // 					EVENT LISTENERS
 // -------------------------------------------------
 
 // Trigger for 'ADD task' button functionality
-addBtn.addEventListener('click', init.createTask);
+addBtn.addEventListener('click', initialChecks);
 
 taskTitle.addEventListener('keypress', function(event) {
 	// TAB key focus functionality
