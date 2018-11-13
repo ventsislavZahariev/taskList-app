@@ -8,8 +8,8 @@ const init = (function () {
 		createTask: function () {
 			// Proceed if the title field is not empty
 			if (taskTitle.value.length > 0 && taskTitle.value !== ' ') {
-				// Clear previous error classes and elements
-				errorRemove();
+				// Clear if there were any error messages
+				clearErrors();
 
 				// Creation phase of all HTML elements and buttons for the tasks
 				if (document.getElementsByTagName('ol').length === 0) {
@@ -68,7 +68,7 @@ const init = (function () {
 
 			// Actions to perform if the task title field is empty
 			else {
-				errorRemove();
+				clearErrors();
 				let createSpan = document.createElement('span');
 				let taskCreationLI = document.getElementsByTagName('li')[0];
 
@@ -82,7 +82,7 @@ const init = (function () {
 })();
 
 // Function to remove error messages and classes
-function errorRemove() {
+function clearErrors() {
 	if (document.getElementsByClassName('error')[0]) {
 		taskTitle.classList.remove('error');
 		document.getElementsByClassName('error')[0].remove();
@@ -94,7 +94,7 @@ function errorRemove() {
 // 					EVENT LISTENERS
 // -------------------------------------------------
 
-// Add button functionality trigger
+// Trigger for 'ADD task' button functionality
 addBtn.addEventListener('click', init.createTask);
 
 taskTitle.addEventListener('keypress', function(event) {
@@ -103,7 +103,7 @@ taskTitle.addEventListener('keypress', function(event) {
 		taskNotes.focus();
 		event.preventDefault();
 	}
-	// ENTER key add task functionality
+	// ENTER key 'add task' functionality
 	if (this.value.length > 0 && (event.keyCode === 13 || event.which === 13)) {
 		init.createTask();
 	}
@@ -115,7 +115,7 @@ taskNotes.addEventListener('keydown', function(event){
 		taskTitle.focus();
 		event.preventDefault();
 	}
-	// SHIFT+ENTER key add task functionality within the Notes field
+	// SHIFT+ENTER key combination 'add task' functionality within the Notes field
 	if (this.value.length > 0 && taskTitle.value.length > 0 && ((event.shiftKey && event.keyCode === 13) || (event.shiftKey && event.which === 13))) {
 		init.createTask();
 		event.preventDefault();
@@ -123,7 +123,7 @@ taskNotes.addEventListener('keydown', function(event){
 });
 
 
-// Event listeners for task specific buttons
+// Event listeners for task-related buttons (done, edit and delete)
 function taskButtonsEvents(btns) {
 	// DONE button functionality
 	for (let item of btns.doneBtn) {
