@@ -3,9 +3,9 @@ const taskNotes = document.getElementById('notes');
 const addBtn = document.getElementById('addBtn');
 const taskListSection = document.getElementById('taskList');
 
-const init = (function () {
+const init = (() => {
 	return {
-		createTask: function () {
+		createTask: () => {
 			// Creation phase of all HTML elements and buttons for the tasks
 			if (document.getElementsByTagName('ol').length === 0) {
 				taskListSection.appendChild(document.createElement('ol'));
@@ -63,6 +63,19 @@ const init = (function () {
 	}
 })();
 
+// Added Errors module
+function throwErrors() {
+	if (document.getElementsByClassName('error').length === 0) {
+		let createSpan = document.createElement('span');
+		let taskCreationLI = document.getElementsByTagName('li')[0];
+
+		createSpan.appendChild(document.createTextNode('*Въведи заглавие на задачата'));
+		createSpan.classList.add('error');
+		taskTitle.classList.add('error');
+		taskCreationLI.insertBefore(createSpan, document.getElementsByTagName('label')[0]);
+	}
+}
+
 // Function to remove error messages and classes
 function clearErrors() {
 	if (document.getElementsByClassName('error')[0]) {
@@ -74,7 +87,7 @@ function clearErrors() {
 function initialChecks() {
 	// Proceed with the app initialisation if the title field is not empty
 	if (taskTitle.value.length > 0 && taskTitle.value !== ' ') {
-		// Clear if there were any error messages
+		// Clear any previous error messages
 		clearErrors();
 		// Task creation
 		init.createTask();
@@ -82,14 +95,7 @@ function initialChecks() {
 
 	// Actions to perform if the mandatory 'Title' field is empty
 	else {
-		clearErrors();
-		let createSpan = document.createElement('span');
-		let taskCreationLI = document.getElementsByTagName('li')[0];
-
-		createSpan.appendChild(document.createTextNode('*Въведи заглавие на задачата'));
-		createSpan.classList.add('error');
-		taskTitle.classList.add('error');
-		taskCreationLI.insertBefore(createSpan, document.getElementsByTagName('label')[0]);
+		throwErrors();
 	}
 }
 
