@@ -1,1 +1,1 @@
-# Tasks manager app project
+# Task manager app project
