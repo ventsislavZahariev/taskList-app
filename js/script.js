@@ -6,7 +6,7 @@ const taskListSection = document.getElementById('taskList');
 const init = (() => {
 	return {
 		createTask: () => {
-			// Creation phase of all HTML elements and buttons for the tasks
+			// Creation module for all HTML elements and buttons for the tasks
 			if (document.getElementsByTagName('ol').length === 0) {
 				taskListSection.appendChild(document.createElement('ol'));
 			}
@@ -63,7 +63,7 @@ const init = (() => {
 	}
 })();
 
-// Added Errors module
+// Create error messages module
 function throwErrors() {
 	if (document.getElementsByClassName('error').length === 0) {
 		let createSpan = document.createElement('span');
